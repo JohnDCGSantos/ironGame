@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  main{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    padding: 0;
+    text-align: center;
+  }
+  #startScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center ;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-image: url('/images/startScreen.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #startScreen h1 {
+    font-family: 'Orbitron', sans-serif; 
+    background-color:rgba(143, 59, 217, 0.5);
+    color: #1C1C1E; 
+    display: flex;
+    flex-direction: column;
+    border: 2px rgba(143, 59, 217, 0.5);
+    box-sizing: border-box;
+    justify-content: center; 
+    border-radius: 5px;
+    border: none;
+    
+    width: 98%;
+    height: 15%;
+
+  }
+
+  #startScreen p {
+    font-family: 'Orbitron', sans-serif; 
+    background-color:rgba(143, 59, 217, 0.5);
+    color: #1C1C1E; 
+    display: flex;
+    flex-direction: column;
+    border: rgba(143, 59, 217, 0.5);
+    box-sizing: border-box;
+    justify-content: center; 
+    border-radius: 5px;
+    border: none;
+    
+    width: 98%;
+    height: 15%;
+  }
+
+  #startButton {
+    display: flex;
+    padding: 15px 20px;
+    font-family: 'Orbitron', sans-serif;
+    background-size: cover;
+    background-color:rgba(143, 59, 217);
+    color: #1C1C1E; 
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #startButton:hover {
+    background-color: #45a049;
+  }
+      
+      
+      #startButton:active {
+        background-color: #630005;
+        transform: scale(0.95);
+      }
+      
+
+      #gameScreen{
+        position: relative;
+        display: none;
+        align-content: center;
+        margin-bottom: 10px;
+        
+        
+        
+        text-align: center;
+        background-image: url(/images/0-1\ \(4\).jpeg);
+        background-size: cover;
+        overflow: hidden;
+        background-position: center;
+        animation: slide 5s infinite linear;
+       
+      }
+@keyframes slide {
+  0% {
+    background-position-y: -800px;
+  }
+  
+  100% {
+    background-position-y: 0px;
+  }
+}
+
+
+
+#gameStats{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 700px;
+  font-family: 'Orbitron', sans-serif; 
+  background-color:rgba(143, 59, 217, 0.5);
+  padding: 0x, 0px;
+  font-size: 20px;
+  margin-top: 20px;
+  
+}
+
+
+#gameContainer {
+  width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center ;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-image: url('/images/startScreen.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    
+  }
+
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+      
+
+  
+ 
+
+
+
+  #gameOverScreen{
+    display: none;
+  }
+  
+  /* Media query for screens smaller than 768px */
+  @media (max-width: 768px) {
+    #gameContainer{
+      width:fit-content;
+      height:fit-content ;
+      background-size: cover;
+    }
+    #gameScreen{
+      background-size: cover;
+    }
+}
+    
+
+      /* Adjust the font size and background size for smaller screens */
+    
+  
+
+  @media (min-width: 768px) and (max-width: 1200px) {
+    #startScreen {
+      font-size: 20px;
+      background-size: cover;
+      width: 100 vw;
+      /* Adjust the font size and background size for medium screens */
+    }
+  }
+  
+  /* Media query for screens larger than 1200px */
+  @media (min-width: 1200px) {
+    #startScreen {
+      font-size: 24px;
+      background-size: cover;
+      width: 100vw;
+    height: 100vh;
+      /* Adjust the font size and background size for larger screens */
+    }
+  }
+  
+  
