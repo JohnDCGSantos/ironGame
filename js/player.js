@@ -4,6 +4,7 @@ class Player {
     constructor(game, gameScreen, isColliding) {
       this.gameScreen = gameScreen;
       this.game = game;
+      this.setGame(game)
       this.width = 50;
       this.height = 80;
       this.top = 700;
@@ -27,7 +28,7 @@ this.game.scoreElement = document.getElementById('Score');
     this.updateScore();
     this.updateLives();
     this.liveDisplay = document.getElementById('Lives');
-  
+   
     }
 
     setGame(game) {
@@ -87,24 +88,35 @@ this.game.scoreElement = document.getElementById('Score');
   }
 
   updateLives() {
-
-    this.livesElement.textContent = `Lives: ${this.lives}`
+    if (this.livesElement) {
+      if (this.lives <= 0) {
+        this.livesElement.textContent = 'Game Over';
+        // Add code here to transition to the game over screen or perform any other desired actions
+      } else {
+        this.livesElement.textContent = `Lives: ${this.lives}`;
+      }
+    }
   }
+    //this.livesElement.textContent = `Lives: ${this.lives}`
+  
 
   updateLivesDisplay() {
     this.liveDisplay.textContent = this.lives;
   }
   decreaseLives() {
     this.lives--;
-    this.updateLives();
+    this.livesElement.textContent = `Lives: ${this.lives}`
+    /*this.updateLives();
     this.updateLivesDisplay();
     if (this.lives <= 0) {
-      game.endGame();
-    }
+      game.game.endGame();
+    }*/
   }
   
   reset() {
     this.element.classList.remove('destroyed');
+    
+   
   }
 }
 

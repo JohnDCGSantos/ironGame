@@ -1,20 +1,29 @@
 class Game{
-    constructor(gameScreen) {
+    constructor() {
     this.startScreen = document.getElementById('startScreen');
     this.gameContainer = document.getElementById('gameContainer');
     this.gameScreen = document.getElementById('gameScreen');
     this.gameStats = document.getElementById('gameStats');
     this.scoreElement = document.getElementById('Score');
-    this.livesElement = document.getElementById('lives');
+    this.livesElement = document.getElementById('Lives');
     this.startButton = document.getElementById('startButton');
     this.restartButton = document.getElementById('restart-button');
     this.gameOverScreen = document.getElementById('gameOverScreen');
     this.width = 700;
     this.height = 800;
-    this.player = new Player(this, this.gameScreen, this.isColliding.bind(this));
+    this.player= new Player(this, this.gameScreen, this.isColliding.bind(this));
+    this.stopObstacleCreation = this.stopObstacleCreation.bind(this);
+this.isGameOver = false;
+    this.obstacles = [];
     
 
-    this.obstacles = [];
+    const restartGameHandler = () => {
+      this.restartGame();
+    };
+
+    this.restartButton.addEventListener('click', restartGameHandler);
+  
+
     /*this.isColliding = (player, obstacle) => {
         const playerRect = player.element.getBoundingClientRect();
         const obstacleRect = obstacle.element.getBoundingClientRect();
@@ -25,8 +34,10 @@ class Game{
           playerRect.bottom > obstacleRect.top
         );
       };*/
-    
-    }
+      
+      
+      
+  }
    
     start() {
         
@@ -44,6 +55,10 @@ class Game{
     gameLoop() {
       this.update()
       this.moveObstacles()
+      if (this.isGameOver) {
+      
+        return; // Stop the game loop
+      }
     requestAnimationFrame(() => this.gameLoop())  // Call the move method of the player on each game loop iteration
     //console.log(this.animatedID)
     
@@ -103,18 +118,85 @@ generateObstacle() {
   
   endGame() {
     this.gameScreen.style.display = 'none';
+    this.gameContainer.style.display = 'none'
     this.gameOverScreen.style.display = 'block'
-    this.endGame();
+    gameOverScreen.style.width = '912px'; // Set the desired width
+    gameOverScreen.style.height = '1368px'
+    gameOverScreen.style.backgroundColor = 'red';
+    console.log('Game Over!')
+    this.isGameOver = true;
+    this.stopObstacleCreation();
+  this.player.destroy();
+  
 
+  this.hideElement(this.gameScreen);
+  this.showElement(this.gameOverScreen);
+  this.hideElement(this.startScreen);
+    /*const restartGameHandler = () => {
+      this.restartGame();
+      this.restartButton.removeEventListener('click', restartGameHandler);
+    };
+  
+   this.restartButton.addEventListener('click', restartGameHandler);
+  }*/
+}
+
+  
+   restartGame() {
+
+    
+    /*this.player.reset();
+  this.obstacles.forEach(obstacle => obstacle.destroy());
+  this.obstacles = [];
+  this.scoreElement.textContent = 'Score: 0';
+  this.livesElement.textContent = 'Lives: 5';
+  this.hideElement(this.gameOverScreen);
+  this.hideElement(this.gameScreen);
+  this.showElement(this.startScreen);
+  
+  this.gameContainer.style.display = 'block';
+  this.gameContainer.style.backgroundImage = 'url("path/to/your/background/image.jpg")';
+  this.gameContainer.style.width = `${this.width}px`;
+  this.gameContainer.style.height = `${this.height}px`;*/ //this.stopObstacleCreation();
+  
+  this.isGameOver = false;
+  this.player.reset();
+  this.stopObstacleCreation();
+  this.hideElement(this.gameOverScreen);
+  this.showElement(this.gameScreen);
+  this.generateObstacle();
+  this.new
+  
+  
   }
-   /* restartGame() {
-      this.player.reset();
-  this.player.updateScore();
+
+  stopObstacleCreation() {
+    clearInterval(this.obstacleInterval);
+  }
+
+  
+  
+    
+    
+  
+    
+    hideElement(element) {
+      element.style.display = 'none';
+    }
+  
+    showElement(element) {
+      element.style.display = 'block';
+    }
+  }
+  
+
+
+  /*this.player.updateScore();
   this.player.updateLives();
   this.gameOverScreen.style.display = 'none';
   this.gameScreen.style.display = 'block';
   this.start();*/
-}
+
 
 
 
@@ -131,4 +213,4 @@ generateObstacle() {
 
 
 // Call the move method of each obstacle to update its position
-    
+

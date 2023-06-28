@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
   const startButton = document.getElementById('startButton')
-  const restartButton = document.getElementById('restartButton')
+  const restartButton = document.getElementById('restart-button')
   let game
 
   function startGame() {
@@ -66,11 +66,39 @@ window.addEventListener('load', () => {
       // ...existing code...
     });*/
   }
-  
+  function restartGame() {
+    console.log('Restart game');
+    game.restartGame();
+    restartButton.addEventListener('click', restartGame);
+  // Remove the existing event listener for the restart button
+  restartButton.removeEventListener('click', restartGame);
+  }
+    /*console.log('Restart game');
+
+    // Reset game screen
+    const gameScreen = document.getElementById('gameScreen');
+    gameScreen.innerHTML = '';
+
+    // Show game container
+    const gameContainer = document.getElementById('gameContainer');
+    gameContainer.style.display = 'flex';
+
+    // Hide game over screen
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    gameOverScreen.style.display = 'none';
+
+    // Reset game instance
+    game = null;
+
+    // Start the game
+    startGame();
+  }*/
 
   startButton.addEventListener('click', function () {
     startGame()
   })
-  ;
   
-  })
+  restartButton.addEventListener('click', ()=> {
+    location.reload()
+  });
+})
