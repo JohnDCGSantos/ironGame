@@ -5,8 +5,10 @@ window.addEventListener('load', () => {
 
   function startGame() {
     console.log('start game')
+
     game = new Game()
     game.start()
+  
     document.addEventListener('keydown', event => {
     const key = event.key
     const possibleKeystrokes = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown' ]
@@ -52,15 +54,23 @@ window.addEventListener('load', () => {
         }
       }
     })
+
+    /*document.addEventListener('DOMContentLoaded', () => {
+      // ...existing code...
+    
+      const gameOverScreen = document.getElementById('gameOverScreen');
+      gameOverScreen.addEventListener('click', () => {
+        game.restartGame();
+      });
+    
+      // ...existing code...
+    });*/
   }
   
 
   startButton.addEventListener('click', function () {
     startGame()
   })
-
-    
- })
-    
-
-
+  ;
+  
+  })

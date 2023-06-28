@@ -1,6 +1,9 @@
+
+
 class Player {
-    constructor(gameScreen) {
+    constructor(game, gameScreen, isColliding) {
       this.gameScreen = gameScreen;
+      this.game = game;
       this.width = 50;
       this.height = 80;
       this.top = 700;
@@ -16,12 +19,21 @@ class Player {
       this.element.style.left = `${this.left}px`;
       this.gameScreen.appendChild(this.element);
       this.projectiles = [];
-
+this.isColliding = isColliding
+this.lives = 5
+this.score = 0
+this.game.scoreElement = document.getElementById('Score');
+    this.livesElement = document.getElementById('Lives');
+    this.updateScore();
+    this.updateLives();
+    this.liveDisplay = document.getElementById('Lives');
   
     }
+
+    setGame(game) {
+      this.game = game;
+    }
   
-    
-    
     move() {
      
       this.left += this.directionX
@@ -51,25 +63,61 @@ class Player {
    }
 
    fireProjectile() {
-    const projectile = new Projectile(this.gameScreen, this.left + this.width / 2, this.top);
+    const projectile = new Projectile(
+      this.gameScreen, 
+      this.projectiles,
+      this.left + this.width / 2, 
+      this.top,
+      this.isColliding
+      );
     this.projectiles.push(projectile); // Add the projectile to the array
     projectile.launch();
   }
     destroy(){
-      this.element.remove();
-    }
+      this.isDestroyed = true;
+  this.element.classList.add('player--destroyed');
+  this.decreaseLives(); // Add this line to decrement lives when destroyed
+}
+
+  
     
+  
+  updateScore() {
+    this.game.scoreElement.textContent = `Score: ${this.score}`
   }
+
+  updateLives() {
+
+    this.livesElement.textContent = `Lives: ${this.lives}`
+  }
+
+  updateLivesDisplay() {
+    this.liveDisplay.textContent = this.lives;
+  }
+  decreaseLives() {
+    this.lives--;
+    this.updateLives();
+    this.updateLivesDisplay();
+    if (this.lives <= 0) {
+      game.endGame();
+    }
+  }
+  
+  reset() {
+    this.element.classList.remove('destroyed');
+  }
+}
 
 
 class Projectile {
-  constructor(gameScreen, x, y) {
+  constructor(gameScreen, projectiles, x, y, isColliding) {
     this.gameScreen = gameScreen;
+    this.projectiles = projectiles
     this.width = 5;
     this.height = 20;
     this.top = y - this.height;
     this.left = x - this.width / 2;
-    this.speed = 5;
+    this.speed = 3;
     this.element = document.createElement('div');
     this.element.style.position = 'absolute';
     this.element.style.width = `${this.width}px`;
@@ -78,12 +126,16 @@ class Projectile {
     this.element.style.top = `${this.top}px`;
     this.element.style.left = `${this.left}px`;
     this.gameScreen.appendChild(this.element);
+    this.isColliding = isColliding
+    this.move = this.move.bind(this);
+   
   }
-
+  destroy() {
+    this.element.remove();
+  }
   launch() {
     const projectileInterval = setInterval(() => {
-      this.top -= this.speed;
-      this.updatePosition();
+      this.move();
 
       if (this.top + this.height < 0) {
         clearInterval(projectileInterval);
@@ -92,19 +144,39 @@ class Projectile {
       }
     }, 16);
   }
+
+
+  move() {
+    this.top -= this.speed;
+    this.updatePosition();
+
+    for (let i = 0; i < this.projectiles.length; i++) {
+      const projectile = this.projectiles[i];
+
+      if (projectile !== this && this.isColliding(projectile, this)) {
+        projectile.destroy();
+        this.destroy();
+      
+        break;
+      }
+    }
+  }
+
+
   remove() {
     // Implement projectile removal logic
-    const index = this.player.projectiles.indexOf(this);
+    const index = this.projectiles.indexOf(this);
     if (index !== -1) {
-      this.player.projectiles.splice(index, 1);
+      this.projectiles.splice(index, 1);
     }
+    this.element.remove()
   }
   updatePosition() {
     this.element.style.top = `${this.top}px`;
     this.element.style.left = `${this.left}px`;
+    
   }
 }
-
 
 
 

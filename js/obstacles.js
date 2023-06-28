@@ -8,7 +8,7 @@ class Obstacle {
       this.width = 40
       this.height = 60
       this.element = document.createElement('img')
-      this.speed = 20;
+      this.speed = 5;
       this.element.src = './images/enemyRed4.png';
       this.element.style.position = 'absolute'
   
@@ -19,7 +19,7 @@ class Obstacle {
       this.element.style.left = `${this.left}px`
   
       this.gameScreen.appendChild(this.element)
-
+       this.isDestroyed = false;
       this.resetPosition();
     }
   
@@ -36,5 +36,10 @@ class Obstacle {
             this.resetPosition();
           }
         }
+        destroy() {
+          this.element.remove();
+          this.isDestroyed = true;
+        }
       }
+
       
