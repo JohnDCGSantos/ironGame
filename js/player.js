@@ -23,11 +23,13 @@ class Player {
 this.isColliding = isColliding
 this.lives = 5
 this.score = 0
-this.game.scoreElement = document.getElementById('Score');
+this.scoreElement =  document.getElementById('Score')
+//this.game.scoreElement = document.getElementById('Score');
     this.livesElement = document.getElementById('Lives');
     this.updateScore();
     this.updateLives();
     this.liveDisplay = document.getElementById('Lives');
+    this.scoreDisplay = document.getElementById('Score')
    
     }
 
@@ -83,7 +85,10 @@ this.game.scoreElement = document.getElementById('Score');
   
     
   
-  updateScore() {
+ updateScore() {
+    /*if (this.scoreElement) {
+      if(this.score)
+    }*/
     this.game.scoreElement.textContent = `Score: ${this.score}`
   }
 
@@ -112,6 +117,11 @@ this.game.scoreElement = document.getElementById('Score');
       game.game.endGame();
     }*/
   }
+  increaseScore(){
+    this.score+=10;
+    this.updateScore()
+    //this.scoreElement.textContent `Score: ${this.score}`
+  }
   
   reset() {
     this.element.classList.remove('destroyed');
@@ -126,10 +136,10 @@ class Projectile {
     this.gameScreen = gameScreen;
     this.projectiles = projectiles
     this.width = 5;
-    this.height = 20;
+    this.height = 10;
     this.top = y - this.height;
     this.left = x - this.width / 2;
-    this.speed = 3;
+    this.speed = 20;
     this.element = document.createElement('div');
     this.element.style.position = 'absolute';
     this.element.style.width = `${this.width}px`;

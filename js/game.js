@@ -15,6 +15,8 @@ class Game{
     this.stopObstacleCreation = this.stopObstacleCreation.bind(this);
 this.isGameOver = false;
     this.obstacles = [];
+    this.score = 0;
+    this.player.updateLives()
     
 
     const restartGameHandler = () => {
@@ -98,6 +100,8 @@ generateObstacle() {
           obstacle.destroy();
           projectile.destroy();
           this.player.projectiles.splice(j, 1);
+          //this.score += 25
+          this.player.increaseScore()
           break;
         }
       }

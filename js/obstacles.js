@@ -12,6 +12,7 @@ class Obstacle {
       this.element.src = './images/enemyRed4.png';
       this.element.style.position = 'absolute'
   
+  
       this.element.style.width = `${this.width}px`
       this.element.style.height = `${this.height}px`
   
@@ -19,6 +20,7 @@ class Obstacle {
       this.element.style.left = `${this.left}px`
   
       this.gameScreen.appendChild(this.element)
+     
        this.isDestroyed = false;
       this.resetPosition();
     }

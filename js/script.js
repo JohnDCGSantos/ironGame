@@ -16,16 +16,16 @@ window.addEventListener('load', () => {
         // Update player's directionX and directionY based on the key pressed
         switch (key) {
           case 'ArrowLeft':
-            game.player.directionX = -1
+            game.player.directionX = -5
             break
           case 'ArrowUp':
-            game.player.directionY = -1
+            game.player.directionY = -5
             break
           case 'ArrowRight':
-            game.player.directionX = 1
+            game.player.directionX = 5
             break
           case 'ArrowDown':
-            game.player.directionY = 1
+            game.player.directionY = 5
             break
         }
       } else if (key === ' ') {
