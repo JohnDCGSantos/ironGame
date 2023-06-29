@@ -122,6 +122,13 @@ this.scoreElement =  document.getElementById('Score')
     this.updateScore()
     //this.scoreElement.textContent `Score: ${this.score}`
   }
+
+  decreaseScore(){
+    this.score-=5;
+    this.updateScore()
+  }
+
+  
   
   reset() {
     this.element.classList.remove('destroyed');

@@ -26,7 +26,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    background-image: url('/images/startScreen.jpeg');
+    background-image: url('/images/Background-2.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -34,8 +34,8 @@ html, body {
 
   #startScreen h1 {
     font-family: 'Orbitron', sans-serif; 
-    background-color:rgba(143, 59, 217, 0.5);
-    color: #1C1C1E; 
+    background-color:rgba(22, 84, 126, 0.3);
+    color: rgb(17, 57, 149) ; 
     display: flex;
     flex-direction: column;
     border: 2px rgba(143, 59, 217, 0.5);
@@ -51,8 +51,9 @@ html, body {
 
   #startScreen p {
     font-family: 'Orbitron', sans-serif; 
-    background-color:rgba(143, 59, 217, 0.5);
-    color: #1C1C1E; 
+    background-color:rgba(178, 33, 17, 0.3);
+  
+    color: rgb(3, 75, 243) ; 
     display: flex;
     flex-direction: column;
     border: rgba(143, 59, 217, 0.5);
@@ -66,12 +67,12 @@ html, body {
   }
 
   #startButton {
-    display: flex;
+    
     padding: 15px 20px;
     font-family: 'Orbitron', sans-serif;
     background-size: cover;
-    background-color:rgba(143, 59, 217);
-    color: #1C1C1E; 
+    background-color:rgba(22, 84, 126, 0.3);
+    color: rgb(17, 57, 149) ; 
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
@@ -79,6 +80,8 @@ html, body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    
+    align-items: center;
   }
   
   #startButton:hover {
@@ -96,12 +99,12 @@ html, body {
         position: relative;
         display: none;
         align-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 1px;
         
         
         
         text-align: center;
-        background-image: url(/images/0-1\ \(4\).jpeg);
+        background-image: url(/images/Background-4.png);
         background-size: cover;
         overflow: hidden;
         background-position: center;
@@ -143,7 +146,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    background-image: url('/images/startScreen.jpeg');
+    background-image: url('/images/Background-4.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -180,44 +183,94 @@ html, body {
 
 
   #gameOverScreen{
-    display: none;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center ;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+   
+    background-image: url('/images/Background-4.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 1px;
   }
+
+  #gameOverScreen h1 {
+    font-family: 'Orbitron', sans-serif; 
+    color:rgba(143, 59, 217); ;
+    font-size: 60px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    box-sizing: border-box;
+    justify-content: center; 
+    border-radius: 5px;
+    border: none;
+    padding-bottom: 200px;
+    width: 98%;
+    height: 15%;
+    font-size: 50px;
+
+  }
+
+  #restart-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    font-family: 'Orbitron', sans-serif;
+    background-size: cover;
+    background-color:rgba(143, 59, 217);
+    color: #1C1C1E; 
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #restart-button:hover {
+    background-color: #45a049;
+  }
+      
+      
+      #restart-button:active {
+        background-color: #630005;
+        transform: scale(0.95);
+      }
+  
   
   /* Media query for screens smaller than 768px */
-  @media (max-width: 768px) {
-    #gameContainer{
-      width:fit-content;
-      height:fit-content ;
-      background-size: cover;
+  @media (max-width: 480px) {
+    #gameContainer {
+      /* Adjust styles for smaller devices */
+     width: 100%;
+      height: auto;
+      max-width: 100%;
+      max-height: none;
+    
     }
-    #gameScreen{
+   #gameScreen{
       background-size: cover;
+      
     }
 }
     
 
       /* Adjust the font size and background size for smaller screens */
     
-  
 
-  @media (min-width: 768px) and (max-width: 1200px) {
-    #startScreen {
-      font-size: 20px;
-      background-size: cover;
-      width: 100 vw;
-      /* Adjust the font size and background size for medium screens */
-    }
-  }
-  
-  /* Media query for screens larger than 1200px */
-  @media (min-width: 1200px) {
-    #startScreen {
-      font-size: 24px;
-      background-size: cover;
-      width: 100vw;
-    height: 100vh;
-      /* Adjust the font size and background size for larger screens */
-    }
-  }
+
+
+
+
+
+
+
   
   

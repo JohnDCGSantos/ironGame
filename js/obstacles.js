@@ -44,4 +44,30 @@ class Obstacle {
         }
       }
 
+     /*class ObstacleType2 extends Obstacle {
+        constructor(gameScreen) {
+          
+          // Customize the properties and appearance of this obstacle type
+          this.width = 80;
+          this.height = 60;
+          this.element.src = './images/ufoYellow.png';
+          this.speed = 8;
+          super(gameScreen)
+          this.gameScreen.appendChild(this.element); 
+          this.left = Math.random() * (gameScreen.offsetWidth - this.width);
+// Set random initial position along the top edge
+      this.top = 0
+      this.element.style.width = `${this.width}px`
+      this.element.style.height = `${this.height}px`
+  
+      this.element.style.top = `${this.top}px`
+      this.element.style.left = `${this.left}px`
+      this.isDestroyed = false;
+          this.resetPosition();
+          
+  }*/
+
+        
+      
+
       

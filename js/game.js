@@ -17,13 +17,24 @@ this.isGameOver = false;
     this.obstacles = [];
     this.score = 0;
     this.player.updateLives()
+    this.player.updateScore()
+  
     
+    //this.audioElement = document.createElement('audio');
+    //this.audioElement.src = './sounds/Szymon Matuszewski - Space Chase.mp3';
+    //this.audioElement.autoplay = true;
+    //this.audioElement.loop = true;
+    //this.audioElement.volume = 0.6;
+    //this.startScreen.appendChild(this.audioElement)
+   
+    this.coinSound = new Audio('./sounds/coin01.wav');
+    this.hitSound = new Audio('./sounds/select.wav');
+    this.overSound = new Audio('./sounds/GameOver.wav');
+    //const restartGameHandler = () => {
+      //this.restartGame();
+    //};
 
-    const restartGameHandler = () => {
-      this.restartGame();
-    };
-
-    this.restartButton.addEventListener('click', restartGameHandler);
+   // this.restartButton.addEventListener('click', restartGameHandler);
   
 
     /*this.isColliding = (player, obstacle) => {
@@ -40,15 +51,19 @@ this.isGameOver = false;
       
       
   }
-   
+ 
+  
+  
     start() {
-        
-        
+      
+      
     this.gameScreen.style.width = `${this.width}px`;
     this.gameScreen.style.height = `${this.height}px`;
        
     this.startScreen.style.display = 'none';
     this.gameScreen.style.display = 'block';
+    this.gameOverScreen.style.display = 'none'
+    
     this.generateObstacle()
     
     this.gameLoop()
@@ -72,8 +87,10 @@ this.player.move()
 
 }
 generateObstacle() {
+  
   setInterval(() => {
-    const obstacle = new Obstacle(this.gameScreen);
+    const obstacle = new Obstacle(this.gameScreen)
+   
     this.obstacles.push(obstacle);
   }, 1000);//pushing to the empty array on line 15
   }
@@ -83,12 +100,18 @@ generateObstacle() {
       obstacle.move();
       
       if (this.isColliding(this.player, obstacle)) {
+        this.hitSound.currentTime = 0; // Rewind the sound to the beginning
+          this.hitSound.play();
+          this.player.decreaseScore()
         this.player.destroy();
         obstacle.destroy(); // Destroy the obstacle
         this.obstacles.splice(i, 1);
         i--;
         if (this.player.lives <= 0) {
+          this.overSound.currentTime = 0; // Rewind the sound to the beginning
+          this.overSound.play();
         this.endGame();
+        this.updateScore()
         } // Decrement i to account for the removed obstacle
         break;
       }
@@ -97,10 +120,12 @@ generateObstacle() {
         const projectile = this.player.projectiles[j];
   
         if (this.isColliding(projectile, obstacle)) {
+          this.coinSound.currentTime = 0; // Rewind the sound to the beginning
+          this.coinSound.play();
           obstacle.destroy();
           projectile.destroy();
           this.player.projectiles.splice(j, 1);
-          //this.score += 25
+          
           this.player.increaseScore()
           break;
         }
@@ -108,6 +133,7 @@ generateObstacle() {
     }
     this.obstacles = this.obstacles.filter(obstacle => !obstacle.isDestroyed);
   }
+ 
   
   isColliding(player, obstacle) {
     const playerRect = player.element.getBoundingClientRect();
@@ -122,20 +148,25 @@ generateObstacle() {
   
   endGame() {
     this.gameScreen.style.display = 'none';
+    
     this.gameContainer.style.display = 'none'
     this.gameOverScreen.style.display = 'block'
-    gameOverScreen.style.width = '912px'; // Set the desired width
-    gameOverScreen.style.height = '1368px'
-    gameOverScreen.style.backgroundColor = 'red';
+    this.gameOverScreen.style.width = '100vw'; // Set the desired width
+    this.gameOverScreen.style.height = '100vh'
     console.log('Game Over!')
     this.isGameOver = true;
     this.stopObstacleCreation();
   this.player.destroy();
   
+  this.update
+  
+  
 
   this.hideElement(this.gameScreen);
   this.showElement(this.gameOverScreen);
   this.hideElement(this.startScreen);
+  
+  
     /*const restartGameHandler = () => {
       this.restartGame();
       this.restartButton.removeEventListener('click', restartGameHandler);
@@ -169,7 +200,7 @@ generateObstacle() {
   this.hideElement(this.gameOverScreen);
   this.showElement(this.gameScreen);
   this.generateObstacle();
-  this.new
+  //this.new
   
   
   }
@@ -189,11 +220,13 @@ generateObstacle() {
     }
   
     showElement(element) {
-      element.style.display = 'block';
+      element.style.display = 'flex';
     }
   }
   
-
+  
+    
+    
 
   /*this.player.updateScore();
   this.player.updateLives();

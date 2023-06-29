@@ -1,8 +1,11 @@
 window.addEventListener('load', () => {
   const startButton = document.getElementById('startButton')
   const restartButton = document.getElementById('restart-button')
+  
+  
+  
   let game
-
+ let gameSound
   function startGame() {
     console.log('start game')
 
@@ -30,11 +33,17 @@ window.addEventListener('load', () => {
         }
       } else if (key === ' ') {
         game.player.fireProjectile()
-      
+        playShootSound()
       
       //console.log(game.player.directionX, game.player.directionY);
       }
       });
+
+      function playShootSound() {
+        const shootSound = new Audio('./sounds/laser_shooting_sfx.wav');
+        shootSound.currentTime = 0; // Rewind the sound to the beginning
+        shootSound.play();
+      }
   
     document.addEventListener('keyup', event => {
       const key = event.key
@@ -66,13 +75,13 @@ window.addEventListener('load', () => {
       // ...existing code...
     });*/
   }
-  function restartGame() {
-    console.log('Restart game');
-    game.restartGame();
-    restartButton.addEventListener('click', restartGame);
+  //function restartGame() {
+    //console.log('Restart game');
+    //game.restartGame();
+    //restartButton.addEventListener('click', restartGame);
   // Remove the existing event listener for the restart button
-  restartButton.removeEventListener('click', restartGame);
-  }
+  //restartButton.removeEventListener('click', restartGame);
+  //}
     /*console.log('Restart game');
 
     // Reset game screen
@@ -93,12 +102,31 @@ window.addEventListener('load', () => {
     // Start the game
     startGame();
   }*/
-
+  gameSound = new Audio('./sounds/S31-Night Prowler.ogg')
+  gameSound.muted = true;
   startButton.addEventListener('click', function () {
     startGame()
+    gameSound.muted = false; // Unmute the audio on user interaction
+  gameSound.play();
   })
+
   
   restartButton.addEventListener('click', ()=> {
     location.reload()
   });
+  const audioElement = document.createElement('audio');
+
+// Set the source file of the audio
+audioElement.src = './sounds/SpaceAtmosphere.mp3';
+
+// Set any additional attributes or properties
+//audioElement.autoplay = true; // Autoplay the audio
+//audioElement.loop = true; // Loop the audio
+//audioElement.volume = 0.5; // Set the volume (0.0 to 1.0)
+
+// Append the audio element to the start screen or desired container
+const startScreen = document.getElementById('startScreen'); // Replace 'startScreen' with your start screen element ID
+startScreen.appendChild(audioElement);
+
+
 })
