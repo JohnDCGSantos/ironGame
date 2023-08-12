@@ -11,7 +11,8 @@ class Obstacle {
       this.speed = 5;
       this.element.src = './images/enemyRed4.png';
       this.element.style.position = 'absolute'
-  
+      this.element2 = document.createElement('img')
+    
   
       this.element.style.width = `${this.width}px`
       this.element.style.height = `${this.height}px`
@@ -20,7 +21,7 @@ class Obstacle {
       this.element.style.left = `${this.left}px`
   
       this.gameScreen.appendChild(this.element)
-     
+    
        this.isDestroyed = false;
       this.resetPosition();
     }

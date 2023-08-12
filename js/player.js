@@ -90,7 +90,12 @@ this.scoreElement =  document.getElementById('Score')
       if(this.score)
     }*/
     this.game.scoreElement.textContent = `Score: ${this.score}`
-  }
+    
+ 
+}
+
+
+  
 
   updateLives() {
     if (this.livesElement) {
@@ -108,6 +113,13 @@ this.scoreElement =  document.getElementById('Score')
   updateLivesDisplay() {
     this.liveDisplay.textContent = this.lives;
   }
+    /*this.liveDisplay.classList.add('scoreAnimation');
+  
+  // Remove the animation class after the animation completes
+  this.liveDisplay.addEventListener('animationend', () => {
+    this.liveDisplay.classList.remove('scoreAnimation');
+  });
+  }*/
   decreaseLives() {
     this.lives--;
     this.livesElement.textContent = `Lives: ${this.lives}`
@@ -119,6 +131,7 @@ this.scoreElement =  document.getElementById('Score')
   }
   increaseScore(){
     this.score+=10;
+    
     this.updateScore()
     //this.scoreElement.textContent `Score: ${this.score}`
   }
