@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./styles/style.css" />
-    <title>Cosmic Blasters</title>
-  </head>
-  <body>
-    <main>
-      
-      <div id="startScreen">
-    
-        <h1>Welcome to Cosmmic Blasters</h1>
-        <button id = "startButton"> START NEW GAME </button>
 
-        
-        <p>Use your keyboard arrows to moove and press <span id="spaceBtn"> SpaceBar </span> to shoot!!</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="./styles/style.css" />
+  <title>Cosmic Blasters</title>
+</head>
 
-       </div>
+<body>
+  <main>
 
-      <div id="gameContainer">
+    <div id="startScreen">
 
-        <div> 
+      <h1>Welcome to Cosmmic Blasters</h1>
+      <button id="startButton"> START NEW GAME </button>
+
+
+      <p>Use your keyboard arrows to moove and press <span id="spaceBtn"> SpaceBar </span> to shoot!!</p>
+
+    </div>
+
+    <div id="gameContainer">
+
+      <div>
         <span id="gameStats">
-        <p>Score: <span id="Score">0 </span></p>
-        <h2>Stats</h2>
-        <p>Lives: <span id="Lives">5 </span></p>
+          <p> <span id="Score">0 </span></p>
+          <h2>Stats</h2>
+          <p><span id="Lives">5 </span></p>
         </span>
-        </div>
-
-        <div id="gameScreen"> </div>
-
       </div>
-          
-        
-        
 
-      <div id="gameOverScreen" >
-        
-        <h1>Game Over!</h1>
-        <br />
-        <button id="restart-button">Restart</button>
-      </div>
-    </main>
-    
-    <script type="text/javascript" src= "./js/game.js"></script>
-    <script type="text/javascript" src="./js/script.js"></script>
-    <script type="text/javascript" src= "./js/player.js"></script>
-    
-    <script type= "text/javascript" src="./js/obstacles.js"></script>
-  </body>
+      <div id="gameScreen"> </div>
+
+    </div>
+
+
+
+
+    <div id="gameOverScreen">
+
+      <h1>Game Over!</h1>
+      <br />
+      <button id="restart-button">Restart</button>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="./js/game.js"></script>
+  <script type="text/javascript" src="./js/script.js"></script>
+  <script type="text/javascript" src="./js/player.js"></script>
+
+  <script type="text/javascript" src="./js/obstacles.js"></script>
+</body>
+
 </html>

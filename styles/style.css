@@ -95,7 +95,7 @@ body {
   position: relative;
   display: none;
   align-content: center;
-  margin-bottom: 1px;
+  margin-bottom: 80px;
   text-align: center;
   background-image: url(../images/Background-4.png);
   background-size: cover;
@@ -236,5 +236,8 @@ body {
   
   #gameScreen{
   background-size: cover;
+  }
+  #gameStats{
+    width: 350px;
   }
 }

@@ -13,7 +13,7 @@ class Game {
 
     this.player = new Player(this, this.gameScreen, this.isColliding.bind(this))
     this.width = 350
-    this.height = 650
+    this.height = 600
     this.obstacles = []
     this.score = 0
     this.player.updateLives()
@@ -119,7 +119,18 @@ class Game {
     this.isGameOver = true
     this.stopObstacleCreation()
     this.player.destroy()
+    const scoreText = document.createElement('p')
+    scoreText.innerText = `Score: ${this.player.score}`
 
+    const restartButton = document.getElementById('restart-button')
+    restartButton.parentNode.insertBefore(scoreText, restartButton)
+    this.scoreText = scoreText
+    this.scoreText.style.width = '100%'
+    this.scoreText.style.height = '30%'
+    this.scoreText.style.color = 'red'
+    this.scoreText.style.fontSize = '30px'
+
+    this.gameOverScreen.appendChild(scoreText)
     this.update
 
     this.hideElement(this.gameScreen)
