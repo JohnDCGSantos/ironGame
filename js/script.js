@@ -9,6 +9,46 @@ window.addEventListener('load', () => {
     game = new Game()
     game.start()
 
+    let touchStartX = null
+    let touchStartY = null
+
+    document.addEventListener('touchstart', event => {
+      const touch = event.touches[0]
+      touchStartX = touch.clientX
+      touchStartY = touch.clientY
+    })
+
+    document.addEventListener('touchmove', event => {
+      if (touchStartX === null || touchStartY === null) {
+        return
+      }
+
+      const touch = event.touches[0]
+      const touchX = touch.clientX
+      const touchY = touch.clientY
+
+      const deltaX = touchX - touchStartX
+      const deltaY = touchY - touchStartY
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        game.player.directionX = deltaX > 0 ? 5 : -5
+        game.player.directionY = 0
+      } else {
+        // Vertical swipe
+        game.player.directionX = 0
+        game.player.directionY = deltaY > 0 ? 5 : -5
+      }
+
+      touchStartX = touchX
+      touchStartY = touchY
+    })
+
+    document.addEventListener('touchend', () => {
+      game.player.directionX = 0
+      game.player.directionY = 0
+    })
+
     document.addEventListener('keydown', event => {
       const key = event.key
       const possibleKeystrokes = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown']
@@ -143,60 +183,5 @@ window.addEventListener('load', () => {
     restartButton.addEventListener('click', () => {
       location.reload()
     })
-
-    let touchStartX = 0
-    let touchStartY = 0
-    let touchDirection = null
-    let shooting = false
-
-    document.addEventListener('touchstart', handleTouchStart)
-    document.addEventListener('touchmove', handleTouchMove)
-    document.addEventListener('touchend', handleTouchEnd)
-
-    function handleTouchStart(event) {
-      const touch = event.touches[0] // Get the first touch point
-      touchStartX = touch.clientX
-      touchStartY = touch.clientY
-    }
-
-    function handleTouchMove(event) {
-      const touch = event.touches[0]
-      const touchX = touch.clientX
-      const touchY = touch.clientY
-
-      // Calculate the difference in touch coordinates
-      const deltaX = touchX - touchStartX
-      const deltaY = touchY - touchStartY
-
-      // Determine the dominant direction of the touch movement
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        touchDirection = deltaX > 0 ? 'right' : 'left'
-      } else {
-        touchDirection = deltaY > 0 ? 'down' : 'up'
-      }
-    }
-
-    function handleTouchEnd(event) {
-      // Reset player's direction based on the touch direction
-      if (touchDirection === 'left') {
-        game.player.directionX = -5
-      } else if (touchDirection === 'right') {
-        game.player.directionX = 5
-      } else if (touchDirection === 'up') {
-        game.player.directionY = -5
-      } else if (touchDirection === 'down') {
-        game.player.directionY = 5
-      } else {
-        game.player.directionX = 0
-        game.player.directionY = 0
-      }
-
-      // Check for shooting
-      if (shooting) {
-        game.player.fireProjectile()
-        //playShootSound()
-        shooting = false
-      }
-    }
   })
 })
