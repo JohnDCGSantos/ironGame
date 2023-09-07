@@ -3,19 +3,20 @@ window.addEventListener('load', () => {
   const restartButton = document.getElementById('restart-button')
   let game
   let gameSound
+  let touchStartX = null
+  let touchStartY = null
+  let shooting = false
 
   function startGame() {
     console.log('start game')
     game = new Game()
     game.start()
 
-    let touchStartX = null
-    let touchStartY = null
-
     document.addEventListener('touchstart', event => {
       const touch = event.touches[0]
       touchStartX = touch.clientX
       touchStartY = touch.clientY
+      shooting = true
     })
 
     document.addEventListener('touchmove', event => {
@@ -47,6 +48,11 @@ window.addEventListener('load', () => {
     document.addEventListener('touchend', () => {
       game.player.directionX = 0
       game.player.directionY = 0
+      if (shooting) {
+        game.player.fireProjectile()
+        playShootSound()
+        shooting = false // Reset the shooting flag
+      }
     })
 
     document.addEventListener('keydown', event => {
