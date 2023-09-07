@@ -71,12 +71,14 @@ window.addEventListener('load', () => {
     location.reload()
   })
 
-  document.addEventListener('touchstart', handleTouchStart)
-  document.addEventListener('touchend', handleTouchEnd)
-
   let touchStartX = 0
   let touchStartY = 0
+  let touchDirection = null
   let shooting = false
+
+  document.addEventListener('touchstart', handleTouchStart)
+  document.addEventListener('touchmove', handleTouchMove)
+  document.addEventListener('touchend', handleTouchEnd)
 
   function handleTouchStart(event) {
     const touch = event.touches[0] // Get the first touch point
@@ -84,46 +86,43 @@ window.addEventListener('load', () => {
     touchStartY = touch.clientY
   }
 
-  function handleTouchEnd(event) {
-    const touch = event.changedTouches[0] // Get the first touch point that ended
-    const touchEndX = touch.clientX
-    const touchEndY = touch.clientY
+  function handleTouchMove(event) {
+    const touch = event.touches[0]
+    const touchX = touch.clientX
+    const touchY = touch.clientY
 
     // Calculate the difference in touch coordinates
-    const deltaX = touchEndX - touchStartX
-    const deltaY = touchEndY - touchStartY
+    const deltaX = touchX - touchStartX
+    const deltaY = touchY - touchStartY
 
-    // Adjust player's direction based on the touch gesture
+    // Determine the dominant direction of the touch movement
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      // Horizontal swipe
-      if (deltaX > 0) {
-        game.player.directionX = 5 // Swipe right
-      } else {
-        game.player.directionX = -5 // Swipe left
-      }
-      game.player.directionY = 0 // Reset vertical direction
+      touchDirection = deltaX > 0 ? 'right' : 'left'
     } else {
-      // Vertical swipe
-      if (deltaY > 0) {
-        game.player.directionY = 5 // Swipe down
-      } else {
-        game.player.directionY = -5 // Swipe up
-      }
-      game.player.directionX = 0 // Reset horizontal direction
+      touchDirection = deltaY > 0 ? 'down' : 'up'
+    }
+  }
+
+  function handleTouchEnd(event) {
+    // Reset player's direction based on the touch direction
+    if (touchDirection === 'left') {
+      game.player.directionX = -5
+    } else if (touchDirection === 'right') {
+      game.player.directionX = 5
+    } else if (touchDirection === 'up') {
+      game.player.directionY = -5
+    } else if (touchDirection === 'down') {
+      game.player.directionY = 5
+    } else {
+      game.player.directionX = 0
+      game.player.directionY = 0
     }
 
-    // Check for a tap gesture to simulate shooting
-    if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
-      if (!shooting) {
-        game.player.fireProjectile()
-        playShootSound()
-        shooting = true
-
-        // Set a timeout to reset the shooting state after a delay
-        setTimeout(() => {
-          shooting = false
-        }, 500) // Adjust the delay as needed
-      }
+    // Check for shooting
+    if (shooting) {
+      game.player.fireProjectile()
+      playShootSound()
+      shooting = false
     }
   }
 })
