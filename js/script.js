@@ -48,6 +48,7 @@ window.addEventListener('load', () => {
     document.addEventListener('touchend', () => {
       game.player.directionX = 0
       game.player.directionY = 0
+
       if (shooting) {
         game.player.fireProjectile()
         playShootSound()
